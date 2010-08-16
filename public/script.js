@@ -31,7 +31,7 @@ var View = Class.create({
       if (match.type == "defid") {
         return "<a href=\"http://www.urbandictionary.com/appadmin/?field=defid&search=" + match.string + "\">" + match.string + "</a>";
       } else {
-        return match.string;
+        return "<a href=\"http://www.urbandictionary.com/appadmin/?field=term&search=" + encodeURIComponent(match.string) + "\">" + match.string + "</a>";
       }
     });
     
