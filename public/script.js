@@ -23,12 +23,20 @@ var Ticket = Class.create({
   }
 });
 
+var View = Class.create({
+  initialize: function(element) {
+    this.element = element;
+  },
+  
+  render: function(matches) {
+    this.element.update(matches.join(" "));
+  }
+});
+
 var success = function(transport, element) {
-  element = element || $("my-widget");
-  
+  var view = new View(element || $("my-widget"));
   var ticket = new Ticket(transport.responseJSON);
-  
-  element.update(ticket.getMatches().join(" "));
+  view.render(ticket.getMatches());
 };
 
 if (window.location.href.match(/ticket/)) {
