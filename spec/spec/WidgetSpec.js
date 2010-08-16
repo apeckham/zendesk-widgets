@@ -6,7 +6,7 @@ describe("Widget", function() {
     transport = {responseJSON: ticket};
     success(transport, element);
     
-    expect(element.innerHTML).toEqual("5050890");
+    expect(element.innerHTML).toEqual("5050890 Nerd");
   });
   
   it("should show some text if there were no defids", function() {
@@ -22,7 +22,7 @@ describe("Widget", function() {
   it("should link to anything that is quoted", function() {
     var element = new Element("div");
     
-    ticket = {"description":"I own the trademark for \"kosher meet market\" and am therefore \"requesting\" the items featuring this name be removed from this page.\r\n\r\n------------------\r\n Submitted from: {\"HTTP_USER_AGENT\":\"Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729)\",\"REMOTE_ADDR\":\"208.122.62.141\",\"HTTP_REFERER\":\"http://www.urbandictionary.com/products.php?defid=2398224\",\"HTTP_COOKIE\":\"country=US; _urban_session=BAh7CDoPc2Vzc2lvbl9pZCIlNjc0ZjhkZTBlYzA5ZDQ3YzZjZmRmMDE5Njc1YjZlYjc6EGFmdGVyX2xvZ2luIgtlZGl0b3I6EXZpZXdlZF9kZWZpZGkDEJgk--bf0a77b787e82e47ec23b69ab1db57354548c851; __gads=ID=b6b9756408606219:T=1281853881:S=ALNI_MbXSkILmQHU9SSQhBxK_JpZyuzM3w; __qca=P0-1545642322-1281853886282; __utma=246446400.175988252.1281853883.1281853883.1281853883.1; __utmb=246446400.4.10.1281853883; __utmc=246446400; __utmz=246446400.1281853990.1.2.utmcsr=yahoo|utmccn=(organic)|utmcmd=organic|utmctr=%22kosher%20meet%20market%22\",\"HTTP_X_FORWARDED_FOR\":\"75.50.180.189, 208.122.62.136\"}"};
+    ticket = {"description":"I own the trademark for \"kosher meet market\" and am therefore 'requesting' the items featuring this name be removed from this page.\r\n\r\n------------------\r\n Submitted from: {\"HTTP_USER_AGENT\":\"Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729)\",\"REMOTE_ADDR\":\"208.122.62.141\",\"HTTP_REFERER\":\"http://www.urbandictionary.com/products.php?defid=2398224\",\"HTTP_COOKIE\":\"country=US; _urban_session=BAh7CDoPc2Vzc2lvbl9pZCIlNjc0ZjhkZTBlYzA5ZDQ3YzZjZmRmMDE5Njc1YjZlYjc6EGFmdGVyX2xvZ2luIgtlZGl0b3I6EXZpZXdlZF9kZWZpZGkDEJgk--bf0a77b787e82e47ec23b69ab1db57354548c851; __gads=ID=b6b9756408606219:T=1281853881:S=ALNI_MbXSkILmQHU9SSQhBxK_JpZyuzM3w; __qca=P0-1545642322-1281853886282; __utma=246446400.175988252.1281853883.1281853883.1281853883.1; __utmb=246446400.4.10.1281853883; __utmc=246446400; __utmz=246446400.1281853990.1.2.utmcsr=yahoo|utmccn=(organic)|utmcmd=organic|utmctr=%22kosher%20meet%20market%22\",\"HTTP_X_FORWARDED_FOR\":\"75.50.180.189, 208.122.62.136\"}"};
     transport = {responseJSON: ticket};
     success(transport, element);
     

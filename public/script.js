@@ -14,6 +14,11 @@ var success = function(transport, element) {
   while (match = pattern.exec(description)) {
     matches.push(match[1]);
   }
+
+  var pattern = /'([^']{0,30})'/g;
+  while (match = pattern.exec(description)) {
+    matches.push(match[1]);
+  }
   
   element.update(matches.join(" "));
 };
