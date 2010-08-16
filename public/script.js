@@ -9,15 +9,15 @@ var Ticket = Class.create({
 
     var matches = [];
 
-    function addMatches(pattern) {
+    function addMatches(pattern, type) {
       while (match = pattern.exec(description)) {
-        matches.push(match[1]);
+        matches.push({string: match[1], type: type});
       }
     }
 
-    addMatches(/defid=(\d+)/g);
-    addMatches(/"([^"]{0,30})"/g);
-    addMatches(/'([^']{0,30})'/g);
+    addMatches(/defid=(\d+)/g, "defid");
+    addMatches(/"([^"]{0,30})"/g, "quoted");
+    addMatches(/'([^']{0,30})'/g, "quoted");
     
     return matches;
   }
@@ -29,6 +29,10 @@ var View = Class.create({
   },
   
   render: function(matches) {
+    matches = $A(matches).collect(function(match) {
+      return match.string;
+    });
+    
     this.element.update(matches.join(" "));
   }
 });
