@@ -4,9 +4,7 @@ var Ticket = Class.create({
   },
   
   getMatches: function() {
-    var description = this.json.description;
-    description = description.split("------------------")[0];
-
+    var description = this.json.description.split("------------------")[0];
     var matches = [];
 
     function addMatches(pattern, type) {
@@ -58,6 +56,5 @@ var Request = Class.create({
 });
 
 if (window.location.href.match(/ticket/)) {
-  var request = new Request();
-  request.send(window.location.href);
+  new Request().send(window.location.href);
 }
