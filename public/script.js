@@ -33,15 +33,24 @@ var View = Class.create({
   }
 });
 
-var success = function(transport, element) {
-  var view = new View(element || $("my-widget"));
-  var ticket = new Ticket(transport.responseJSON);
-  view.render(ticket.getMatches());
-};
+var Controller = Class.create({
+  initialize: function() {
+  },
+  
+  success: function(transport, element) {
+    var view = new View(element || $("my-widget"));
+    var ticket = new Ticket(transport.responseJSON);
+    view.render(ticket.getMatches());
+  }
+});
 
 if (window.location.href.match(/ticket/)) {
+  
   new Ajax.Request(window.location.href + ".json", {
     method: "GET",
-    onSuccess: success
+    onSuccess: function() {
+      var controller = new Controller();
+      controller.success.call(arguments)
+    }
   });
 }
