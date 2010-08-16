@@ -1,6 +1,9 @@
 var success = function(transport, element) {
   element = element || $("my-widget");
-  element.update("Subject: " + transport.responseJSON.subject);
+  var description = transport.responseJSON.description;
+  var match = description.match(/defid=(\d+)/);
+  
+  element.update(match[1]);
 };
 
 if (window.location.href.match(/ticket/)) {
