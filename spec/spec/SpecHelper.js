@@ -1,2 +1,2 @@
-beforeEach(function() {
+afterEach(function() {
 });

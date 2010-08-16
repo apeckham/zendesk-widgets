@@ -1,5 +1,6 @@
-var success = function(transport) {
-  $("my-widget").update("Subject: " + transport.responseJSON.subject);
+var success = function(transport, element) {
+  element = element || $("my-widget");
+  element.update("Subject: " + transport.responseJSON.subject);
 };
 
 if (window.location.href.match(/ticket/)) {
