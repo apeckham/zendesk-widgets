@@ -3,12 +3,16 @@ var success = function(transport, element) {
   var description = transport.responseJSON.description;
   var match = description.match(/defid=(\d+)/);
   
-  element.update(match[1]);
+  if (match) {
+    element.update(match[1]);
+  } else {
+    element.update("no defids");
+  }
 };
 
-if (window.location.href.match(/ticket/)) {
+// if (window.location.href.match(/ticket/)) {
   new Ajax.Request(window.location.href + ".json", {
     method: "GET",
     onSuccess: success
   });
-}
+// }
