@@ -41,16 +41,19 @@ var Controller = Class.create({
     var view = new View(element || $("my-widget"));
     var ticket = new Ticket(transport.responseJSON);
     view.render(ticket.getMatches());
+  },
+  
+  fetch: function(href) {
+    new Ajax.Request(href + ".json", {
+      method: "GET",
+      onSuccess: function() {
+        controller.success.call(arguments)
+      }
+    });
   }
 });
 
 if (window.location.href.match(/ticket/)) {
-  
-  new Ajax.Request(window.location.href + ".json", {
-    method: "GET",
-    onSuccess: function() {
-      var controller = new Controller();
-      controller.success.call(arguments)
-    }
-  });
+  var controller = new Controller();
+  controller.fetch(window.location.href);
 }
