@@ -28,7 +28,11 @@ var View = Class.create({
   
   render: function(matches) {
     matches = $A(matches).collect(function(match) {
-      return match.string;
+      if (match.type == "defid") {
+        return "<a href=\"http://www.urbandictionary.com/appadmin/?field=defid&search=" + match.string + "\">" + match.string + "</a>";
+      } else {
+        return match.string;
+      }
     });
     
     this.element.update(matches.join(" "));
