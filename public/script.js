@@ -37,7 +37,7 @@ var View = Class.create({
   }
 });
 
-var Controller = Class.create({
+var Request = Class.create({
   initialize: function() {
   },
   
@@ -47,17 +47,17 @@ var Controller = Class.create({
     view.render(ticket.getMatches());
   },
   
-  fetch: function(href) {
+  send: function(href) {
     new Ajax.Request(href + ".json", {
       method: "GET",
       onSuccess: function() {
-        controller.success.call(arguments)
+        request.success.call(arguments)
       }
     });
   }
 });
 
 if (window.location.href.match(/ticket/)) {
-  var controller = new Controller();
-  controller.fetch(window.location.href);
+  var request = new Request();
+  request.send(window.location.href);
 }
