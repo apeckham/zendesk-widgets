@@ -4,21 +4,16 @@ var success = function(transport, element) {
   description = description.split("------------------")[0];
 
   var matches = [];
-
-  var pattern = /defid=(\d+)/g;
-  while (match = pattern.exec(description)) {
-    matches.push(match[1]);
+  
+  function addMatches(pattern) {
+    while (match = pattern.exec(description)) {
+      matches.push(match[1]);
+    }
   }
 
-  var pattern = /"([^"]+)"/g;
-  while (match = pattern.exec(description)) {
-    matches.push(match[1]);
-  }
-
-  var pattern = /'([^']{0,30})'/g;
-  while (match = pattern.exec(description)) {
-    matches.push(match[1]);
-  }
+  addMatches(/defid=(\d+)/g);
+  addMatches(/"([^"]{0,30})"/g);
+  addMatches(/'([^']{0,30})'/g);
   
   element.update(matches.join(" "));
 };
