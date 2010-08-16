@@ -35,7 +35,14 @@ var View = Class.create({
       }
     });
     
-    this.element.update(matches.join(" "));
+    var ul = new Element("ul");
+    $A(matches).each(function(match) {
+      var li = new Element("li");
+      li.innerHTML = match;
+      ul.appendChild(li)
+    });
+    
+    this.element.update(ul);
   }
 });
 

@@ -22,7 +22,7 @@ describe("Integration", function() {
     transport = {responseJSON: ticket};
     new Request().success(transport, element);
     
-    expect(element.getInnerText()).toEqual("kosher meet market requesting");
+    expect(element.getInnerText()).toEqual("kosher meet marketrequesting");
   });
 });
 
