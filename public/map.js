@@ -1,7 +1,7 @@
 var geoPlugin = function(geoInfo) {
   var latlng = new google.maps.LatLng(geoInfo.geoplugin_latitude, geoInfo.geoplugin_longitude);
   var myOptions = {
-    zoom: 8,
+    zoom: 4,
     center: latlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
@@ -9,7 +9,7 @@ var geoPlugin = function(geoInfo) {
 }
 
 var mapLoaded = function() {
-  Widget.require('http://www.geoplugin.net/json.gp?ip=xx.xx.xx.xx', {type: 'text/javascript'})
+  Widget.require('http://www.geoplugin.net/json.gp?ip=86.34.204.8', {type: 'text/javascript'})
 }
 
 Widget.require('http://maps.google.com/maps/api/js?sensor=false&callback=mapLoaded', {type: 'text/javascript'});
