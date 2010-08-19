@@ -1,6 +1,5 @@
 var Urban = {};
 
-
 Urban.Ticket = Class.create({
   initialize: function(json) {
     this.json = json;
