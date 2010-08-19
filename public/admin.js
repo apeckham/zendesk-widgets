@@ -24,7 +24,7 @@ var UrbanWidget = {
 
   View: Class.create({
     initialize: function(element) {
-      this.element = element || $("my-widget");
+      this.element = element || $("admin-widget");
     },
 
     render: function(matches) {
