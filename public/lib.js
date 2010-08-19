@@ -1,4 +1,4 @@
-var UrbanWidget = {
+var Urban = {
   Ticket: Class.create({
     initialize: function(json) {
       this.json = json;
@@ -52,8 +52,8 @@ var UrbanWidget = {
     },
 
     success: function(transport, element) {
-      var view = new UrbanWidget.View(element);
-      var ticket = new UrbanWidget.Ticket(transport.responseJSON);
+      var view = new Urban.View(element);
+      var ticket = new Urban.Ticket(transport.responseJSON);
       view.render(ticket.getMatches());
     },
 
