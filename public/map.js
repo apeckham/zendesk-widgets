@@ -1,7 +1,7 @@
 var geoPlugin = function(geoplugin) {
   var latlng = new google.maps.LatLng(geoplugin.geoplugin_latitude, geoplugin.geoplugin_longitude);
   var options = {zoom: 4, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP};
-  new google.maps.Map($("map_canvas"), options);
+  new google.maps.Map($("map-widget"), options);
 }
 
 var mapsCallback = function() {
