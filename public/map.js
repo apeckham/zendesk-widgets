@@ -14,17 +14,17 @@ Urban.Map = Class.create({
   },
 
   ticketLoaded: function(ticket) {
-    loadScript('http://www.geoplugin.net/json.gp?ip=' + ticket.getServerParameters().getIp());
+    var serverParameters = ticket.getServerParameters();
+    if (!serverParameters || !serverParameters.getIp()) {
+      this.element.update("No IP");
+      return;
+    }
+    
+    loadScript('http://www.geoplugin.net/json.gp?ip=' + serverParameters.getIp());
   },
   
   geodataLoaded: function(geodata) {
-    new Urban.Map.View(this.element, geodata);
-  }
-});
-
-Urban.Map.View = Class.create({
-  initialize: function(element, geodata) {
     var latLng = new google.maps.LatLng(geodata.geoplugin_latitude, geodata.geoplugin_longitude);
-    new google.maps.Map(element, {zoom: 6, center: latLng, mapTypeId: google.maps.MapTypeId.ROADMAP});
+    new google.maps.Map(this.element, {zoom: 6, center: latLng, mapTypeId: google.maps.MapTypeId.ROADMAP});
   }
 });

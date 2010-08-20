@@ -33,4 +33,40 @@ describe("Maps", function() {
     expect(google.maps.LatLng.mostRecentCall.args[0]).toEqual("myLat");
     expect(google.maps.LatLng.mostRecentCall.args[1]).toEqual("myLon");
   });
+
+  it("renders an error when ticket doesn't have parameters", function() {
+    spyOn(window, 'loadScript');
+
+    spyOn(Urban.Ticket, 'load').andCallFake(function(callback) {
+      var ticket = new Urban.Ticket({"description":"Hello,Thanks,\nN"});
+      callback(ticket);
+    });
+    
+    var element = document.createElement('div');
+    new Urban.Map(element);
+    window.mapsLoaded();
+    
+    expect(window.loadScript.callCount).toEqual(1);
+    expect(window.loadScript.argsForCall[0]).toEqual(['http://maps.google.com/maps/api/js?sensor=false&callback=mapsLoaded']);
+    
+    expect(element.innerHTML).toEqual("No IP");
+  });
+
+  it("renders an error when ticket has parameters but no IP", function() {
+    spyOn(window, 'loadScript');
+
+    spyOn(Urban.Ticket, 'load').andCallFake(function(callback) {
+      var ticket = new Urban.Ticket({"description":"Hello,Thanks,\nN\n\n------------------\n Submitted from: {\"HTTP_USER_AGENT\":\"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.126 Safari/533.4\",\"REMOTE_ADDR\":\"208.122.31.10\",\"HTTP_REFERER\":null,\"HTTP_COOKIE\":\"__qca=P0-447681624-1282156495013; __gads=ID=cef860e362d010e2:T=1282156496:S=ALNI_MZnlOLsEPsLIMpNPUFSyXIqYN0WTg; __utmz=246446400.1282156669.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=emil%20mesaros; __utma=246446400.35929657.1282156669.1282156669.1282156669.1; __utmc=246446400; __utmb=246446400.1.10.1282156669; _urban_session=BAh7BzoPc2Vzc2lvbl9pZCIlZDAwMGI0OGQ4NDUxMzc2NGQ5OTk4YjYxZDc0MjYyYzY6EXZpZXdlZF9kZWZpZCIMMzE1MDg1Ng%3D%3D--e36a5b9417acd5ab9fef2a7cf434acdc3200e422\"}"});
+      callback(ticket);
+    });
+    
+    var element = document.createElement('div');
+    new Urban.Map(element);
+    window.mapsLoaded();
+    
+    expect(window.loadScript.callCount).toEqual(1);
+    expect(window.loadScript.argsForCall[0]).toEqual(['http://maps.google.com/maps/api/js?sensor=false&callback=mapsLoaded']);
+    
+    expect(element.innerHTML).toEqual("No IP");
+  });
 });
