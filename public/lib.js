@@ -7,6 +7,10 @@ Urban.ServerParameters = Class.create({
   
   get: function(key) {
     return this.json[key];
+  },
+  
+  getIp: function() {
+    return '86.34.204.8';
   }
 });
 

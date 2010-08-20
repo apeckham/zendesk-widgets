@@ -24,6 +24,13 @@ describe("Ticket", function() {
   it("handles bad JSON");
 });
 
+describe("Server parameters", function() {
+  it("should return the IP", function() {
+    var serverParameters = new Urban.ServerParameters({"REMOTE_ADDR": "208.122.31.10", "HTTP_X_FORWARDED_FOR": "86.34.204.8, 208.122.31.29"});
+    expect(serverParameters.getIp()).toEqual("86.34.204.8");
+  })
+});
+
 describe("View", function() {
   it("should show some text if there were no defids", function() {
     new Urban.View(element).render([]);
