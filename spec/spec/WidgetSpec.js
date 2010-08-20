@@ -16,16 +16,6 @@ describe("Ticket", function() {
   });
 });
 
-describe("Integration", function() {  
-  it("integrates", function() {
-    ticket = {"description":"I own the trademark for \"kosher meet market\" and am therefore 'requesting'"};
-    transport = {responseJSON: ticket};
-    new Urban.Request().success(transport, element);
-    
-    expect(element.getInnerText()).toEqual("kosher meet marketrequesting");
-  });
-});
-
 describe("View", function() {
   it("should show some text if there were no defids", function() {
     new Urban.View(element).render([]);

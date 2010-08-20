@@ -25,7 +25,7 @@ Urban.Ticket = Class.create({
 
 Urban.View = Class.create({
   initialize: function(element) {
-    this.element = element || $("admin-widget");
+    this.element = element || $("admin-element");
   },
 
   render: function(matches) {
@@ -48,20 +48,36 @@ Urban.View = Class.create({
   }
 });
 
-Urban.Request = Class.create({
-  initialize: function() {
-  },
-
-  success: function(transport, element) {
-    var view = new Urban.View(element);
-    var ticket = new Urban.Ticket(transport.responseJSON);
-    view.render(ticket.getMatches());
-  },
-
-  send: function(href) {
-    href = href.replace(/\?.+/, "");
-    href += ".json";
+Urban.Admin = Class.create({
+  initialize: function(element) {
+    this.view = new Urban.View(element);
     
+    var href = window.location.href.replace(/\?.+/, "") + ".json";
     new Ajax.Request(href, {method: "GET", onSuccess: this.success.bind(this)});
+  },
+
+  success: function(transport) {
+    var ticket = new Urban.Ticket(transport.responseJSON);
+    this.view.render(ticket.getMatches());
+  }
+});
+
+Urban.Map = Class.create({
+  initialize: function(element) {
+    window.geoPlugin = function(geoplugin) {
+      var latlng = new google.maps.LatLng(geoplugin.geoplugin_latitude, geoplugin.geoplugin_longitude);
+      var options = {zoom: 4, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP};
+      new google.maps.Map(element, options);
+    };
+
+    window.mapsCallback = function() {
+      var script = document.createElement('script');
+      script.src = 'http://www.geoplugin.net/json.gp?ip=86.34.204.8';
+      document.body.appendChild(script);
+    };
+    
+    var script = document.createElement('script');
+    script.src = 'http://maps.google.com/maps/api/js?sensor=false&callback=mapsCallback';
+    document.body.appendChild(script);
   }
 });
