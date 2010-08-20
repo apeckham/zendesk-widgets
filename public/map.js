@@ -28,3 +28,5 @@ Urban.Map = Class.create({
     new google.maps.Map(this.element, {zoom: 6, center: latLng, mapTypeId: google.maps.MapTypeId.ROADMAP});
   }
 });
+
+Urban.Map.MAPS_URL = 'http://maps.google.com/maps/api/js?sensor=false&callback=mapsLoaded';

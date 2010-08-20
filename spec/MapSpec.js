@@ -4,7 +4,6 @@ describe("Maps", function() {
   
   beforeEach(function() {
     spyOn(window, 'loadScript');
-
     spyOn(Urban.Ticket, 'load').andCallFake(function(callback) {
       callback(ticket);
     });
@@ -26,7 +25,7 @@ describe("Maps", function() {
     window.geoPlugin({geoplugin_latitude: "myLat", geoplugin_longitude: "myLon"});
     
     expect(window.loadScript.callCount).toEqual(2);
-    expect(window.loadScript.argsForCall[0]).toEqual(['http://maps.google.com/maps/api/js?sensor=false&callback=mapsLoaded']);
+    expect(window.loadScript.argsForCall[0]).toEqual([Urban.Map.MAPS_URL]);
     expect(window.loadScript.argsForCall[1]).toEqual(['http://www.geoplugin.net/json.gp?ip=86.34.204.8']);
     
     expect(google.maps.Map).toHaveBeenCalled();
@@ -48,8 +47,7 @@ describe("Maps", function() {
       new Urban.Map(element);
       window.mapsLoaded();
       expect(window.loadScript.callCount).toEqual(1);
-      expect(window.loadScript.argsForCall[0]).toEqual(['http://maps.google.com/maps/api/js?sensor=false&callback=mapsLoaded']);
-
+      expect(window.loadScript.argsForCall[0]).toEqual([Urban.Map.MAPS_URL]);
       expect(element.innerHTML).toEqual("No IP");
     });
 
@@ -58,9 +56,8 @@ describe("Maps", function() {
 
       new Urban.Map(element);
       window.mapsLoaded();
-
       expect(window.loadScript.callCount).toEqual(1);
-      expect(window.loadScript.argsForCall[0]).toEqual(['http://maps.google.com/maps/api/js?sensor=false&callback=mapsLoaded']); 
+      expect(window.loadScript.argsForCall[0]).toEqual([Urban.Map.MAPS_URL]);
       expect(element.innerHTML).toEqual("No IP");
     });
   });
