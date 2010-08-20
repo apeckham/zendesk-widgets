@@ -1,9 +1,3 @@
-var element;
-
-beforeEach(function() {
-  element = new Element("div");
-});
-
 describe("Ticket", function() {
   it("should extract defids", function() {
     ticket = new Urban.Ticket({description: "The word is 'Nerd' - http://www.urbandictionary.com/define.php?term=Nerd&defid=5050890"});
@@ -27,32 +21,11 @@ describe("Ticket", function() {
   
   it("handles missing JSON");
   it("handles bad JSON");
-});
 
-describe("Server parameters", function() {
-  it("should return the IP", function() {
-    var serverParameters = new Urban.Ticket.ServerParameters({"REMOTE_ADDR": "208.122.31.10", "HTTP_X_FORWARDED_FOR": "86.34.204.8, 208.122.31.29"});
-    expect(serverParameters.getIp()).toEqual("86.34.204.8");
-  })
-});
-
-describe("View", function() {
-  it("should show some text if there were no defids", function() {
-    new Urban.Admin.View(element).render([]);
-    expect(element.getInnerText()).toEqual("");
-  });
-  
-  it("should link to appadmin", function() {
-    new Urban.Admin.View(element).render([{string: "150125", type: "defid"}]);
-    var anchors = element.select("a");
-    expect(anchors.length).toEqual(1);
-    expect(anchors[0].href).toEqual("http://www.urbandictionary.com/appadmin/?field=defid&search=150125");
-  });
-  
-  it("should link to appadmin", function() {
-    new Urban.Admin.View(element).render([{string: "a b", type: "term"}]);
-    var anchors = element.select("a");
-    expect(anchors.length).toEqual(1);
-    expect(anchors[0].href).toEqual("http://www.urbandictionary.com/appadmin/?field=term&search=a%20b");
+  describe("Server parameters", function() {
+    it("should return the IP", function() {
+      var serverParameters = new Urban.Ticket.ServerParameters({"REMOTE_ADDR": "208.122.31.10", "HTTP_X_FORWARDED_FOR": "86.34.204.8, 208.122.31.29"});
+      expect(serverParameters.getIp()).toEqual("86.34.204.8");
+    })
   });
 });
