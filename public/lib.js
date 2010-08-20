@@ -10,7 +10,7 @@ Urban.ServerParameters = Class.create({
   },
   
   getIp: function() {
-    return '86.34.204.8';
+    return this.json["HTTP_X_FORWARDED_FOR"].split(", ")[0];
   }
 });
 
