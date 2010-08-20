@@ -30,11 +30,15 @@ Urban.Ticket = Class.create({
         matches.push({string: callback(match[1]), type: type});
       }
     }
+    
+    function decode(string) {
+      return decodeURIComponent(string.replace(/\+/g, " "));
+    }
 
     addMatches(/defid=(\d+)/g, "defid");
     addMatches(/"([^"]{0,30})"/g, "term");
     addMatches(/'([^']{0,30})'/g, "term");
-    addMatches(/term=([\w%]+)/g, "term", decodeURIComponent);
+    addMatches(/term=([\w%\+]+)/g, "term", decode);
 
     return matches;
   },

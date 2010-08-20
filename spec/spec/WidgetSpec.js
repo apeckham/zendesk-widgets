@@ -16,8 +16,8 @@ describe("Ticket", function() {
   });
   
   it("should extract terms", function() {
-    ticket = new Urban.Ticket({description: "The word is http://www.urbandictionary.com/define.php?term=Nerd%20bird)"});
-    expect(ticket.getMatches()).toEqual([{string: 'Nerd bird', type: 'term'}]);
+    ticket = new Urban.Ticket({description: "The word is http://www.urbandictionary.com/define.php?term=Nerd%20bird+jetblue+plane)"});
+    expect(ticket.getMatches()).toEqual([{string: 'Nerd bird jetblue plane', type: 'term'}]);
   });
   
   it("should extract server parameters", function() {
