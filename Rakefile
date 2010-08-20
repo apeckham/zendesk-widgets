@@ -1,5 +1,5 @@
 task :default do
-  system("open spec/SpecRunner.html")
+  system("open SpecRunner.html")
 end
 
 task :html do
