@@ -7,12 +7,12 @@ beforeEach(function() {
 describe("Ticket", function() {
   it("should extract defids", function() {
     ticket = new Urban.Ticket({description: "The word is 'Nerd' - http://www.urbandictionary.com/define.php?term=Nerd&defid=5050890"});
-    expect(ticket.getMatches()).toEqual([{string: '5050890', type: 'defid'}, {string: 'Nerd', type: 'quoted'}]);
+    expect(ticket.getMatches()).toEqual([{string: '5050890', type: 'defid'}, {string: 'Nerd', type: 'term'}]);
   });
   
-  it("should extract quoted text", function() {
+  it("should extract term text", function() {
     ticket = new Urban.Ticket({description: "I own the trademark for \"kosher meet market\" and am therefore 'requesting' the items"});
-    expect(ticket.getMatches()).toEqual([{string: 'kosher meet market', type: 'quoted'}, {string: 'requesting', type: 'quoted'}]);
+    expect(ticket.getMatches()).toEqual([{string: 'kosher meet market', type: 'term'}, {string: 'requesting', type: 'term'}]);
   });
   
   it("should extract server parameters", function() {
@@ -45,7 +45,7 @@ describe("View", function() {
   });
   
   it("should link to appadmin", function() {
-    new Urban.View(element).render([{string: "a b", type: "quoted"}]);
+    new Urban.View(element).render([{string: "a b", type: "term"}]);
     var anchors = element.select("a");
     expect(anchors.length).toEqual(1);
     expect(anchors[0].href).toEqual("http://www.urbandictionary.com/appadmin/?field=term&search=a%20b");

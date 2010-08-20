@@ -30,8 +30,8 @@ Urban.Ticket = Class.create({
     }
 
     addMatches(/defid=(\d+)/g, "defid");
-    addMatches(/"([^"]{0,30})"/g, "quoted");
-    addMatches(/'([^']{0,30})'/g, "quoted");
+    addMatches(/"([^"]{0,30})"/g, "term");
+    addMatches(/'([^']{0,30})'/g, "term");
 
     return matches;
   },
