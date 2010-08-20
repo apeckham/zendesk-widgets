@@ -24,21 +24,17 @@ Urban.Ticket = Class.create({
     var matches = [];
 
     function addMatches(pattern, type, callback) {
-      callback = callback || Prototype.K;
-      
       while (match = pattern.exec(description)) {
-        matches.push({string: callback(match[1]), type: type});
+        matches.push({string: (callback || Prototype.K)(match[1]), type: type});
       }
-    }
-    
-    function decode(string) {
-      return decodeURIComponent(string.replace(/\+/g, " "));
     }
 
     addMatches(/defid=(\d+)/g, "defid");
-    addMatches(/"([^"]{0,30})"/g, "term");
-    addMatches(/'([^']{0,30})'/g, "term");
-    addMatches(/term=([\w%\+]+)/g, "term", decode);
+    addMatches(/"([^"]{0,50})"/g, "term");
+    addMatches(/'([^']{0,50})'/g, "term");
+    addMatches(/term=([\w%\+]+)/g, "term", function(string) {
+      return decodeURIComponent(string.replace(/\+/g, " "));
+    });
 
     return matches;
   },
@@ -49,17 +45,28 @@ Urban.Ticket = Class.create({
   }
 });
 
+Urban.Ticket.load = function(callback) {
+  var href = window.location.href.replace(/\?.+/, "") + ".json";
+  
+  new Ajax.Request(href, {method: "GET", onSuccess: function(transport) {
+    var ticket = new Urban.Ticket(transport.responseJSON);
+    callback(ticket);
+  }});
+};
+
 Urban.View = Class.create({
   initialize: function(element) {
-    this.element = element || $("admin-element");
+    this.element = element;
   },
 
   render: function(matches) {
     matches = $A(matches).collect(function(match) {
+      html = "<a href=\"http://www.urbandictionary.com/appadmin/?field=";
+      
       if (match.type == "defid") {
-        return "<a href=\"http://www.urbandictionary.com/appadmin/?field=defid&search=" + match.string + "\">" + match.string + "</a>";
+        return html + "defid&search=" + match.string + "\">" + match.string + "</a>";
       } else {
-        return "<a href=\"http://www.urbandictionary.com/appadmin/?field=term&search=" + encodeURIComponent(match.string) + "\">" + match.string + "</a>";
+        return html + "term&search=" + encodeURIComponent(match.string) + "\">" + match.string + "</a>";
       }
     });
 
@@ -73,14 +80,6 @@ Urban.View = Class.create({
     this.element.update(ul);
   }
 });
-
-Urban.Ticket.load = function(callback) {
-  var href = window.location.href.replace(/\?.+/, "") + ".json";
-  new Ajax.Request(href, {method: "GET", onSuccess: function(transport) {
-    var ticket = new Urban.Ticket(transport.responseJSON);
-    callback(ticket);
-  }});
-};
 
 Urban.Admin = Class.create({
   initialize: function(element) {
