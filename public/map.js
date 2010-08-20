@@ -10,13 +10,19 @@ Urban.Map = Class.create({
   },
   
   geoPlugin: function(geoplugin) {
-    var latLng = new google.maps.LatLng(geoplugin.geoplugin_latitude, geoplugin.geoplugin_longitude);
-    new google.maps.Map(this.element, {zoom: 6, center: latLng, mapTypeId: google.maps.MapTypeId.ROADMAP});
+    new Urban.Map.View(this.element, geoplugin);
   },
   
   mapsLoaded: function() {
     Urban.Ticket.load(function(ticket) {
       loadScript('http://www.geoplugin.net/json.gp?ip=' + ticket.getServerParameters().getIp());
     });
+  }
+});
+
+Urban.Map.View = Class.create({
+  initialize: function(element, geoplugin) {
+    var latLng = new google.maps.LatLng(geoplugin.geoplugin_latitude, geoplugin.geoplugin_longitude);
+    new google.maps.Map(element, {zoom: 6, center: latLng, mapTypeId: google.maps.MapTypeId.ROADMAP});
   }
 });
