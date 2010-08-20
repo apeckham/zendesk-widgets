@@ -30,11 +30,10 @@ Urban.Ticket = Class.create({
     if (!matches) {
       return null;
     }
-    var serverJson = matches[1];
-    
+
     var parsed;
     try {
-      parsed = JSON.parse(serverJson);
+      parsed = JSON.parse(matches[1]);
     } catch (e) {
       return null;
     }
