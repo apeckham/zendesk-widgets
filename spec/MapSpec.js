@@ -31,5 +31,6 @@ describe("Maps", function() {
     expect(google.maps.Map.mostRecentCall.args[1].zoom).toEqual(6);
     expect(google.maps.Map.mostRecentCall.args[1].center.arguments[0]).toEqual("myLat");
     expect(google.maps.Map.mostRecentCall.args[1].center.arguments[1]).toEqual("myLon");
+    expect(google.maps.Map.mostRecentCall.args[1].mapTypeId).toEqual(10101);
   });
 });
