@@ -1,5 +1,15 @@
 var Urban = {};
 
+Urban.ServerParameters = Class.create({
+  initialize: function(json) {
+    this.json = json;
+  },
+  
+  get: function(key) {
+    return this.json[key];
+  }
+});
+
 Urban.Ticket = Class.create({
   initialize: function(json) {
     this.json = json;
@@ -23,9 +33,8 @@ Urban.Ticket = Class.create({
   },
   
   getServerParameters: function() {
-    window.d = this.json.description;
     var serverJson = this.json.description.match(/------------------\s+Submitted from: (\{.+\})/)[1];
-    return JSON.parse(serverJson);
+    return new Urban.ServerParameters(JSON.parse(serverJson));
   }
 });
 
