@@ -19,13 +19,25 @@ describe("Ticket", function() {
     expect(ticket.getServerParameters().get('HTTP_USER_AGENT')).toEqual("Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.126 Safari/533.4");
   });
   
-  it("handles missing JSON");
-  it("handles bad JSON");
+  it("should extract server parameters when missing", function() {
+    ticket = new Urban.Ticket({"description":"Hello,Thanks,"});
+    expect(ticket.getServerParameters()).toBeNull();
+  });
+  
+  it("should handle invalid JSON", function() {
+    ticket = new Urban.Ticket({"description":"Hello,Thanks,\nN\n\n------------------\n Submitted from: {\"HTTP_USER_AGENT}"});
+    expect(ticket.getServerParameters()).toBeNull();
+  });
 
   describe("Server parameters", function() {
     it("should return the IP", function() {
       var serverParameters = new Urban.Ticket.ServerParameters({"REMOTE_ADDR": "208.122.31.10", "HTTP_X_FORWARDED_FOR": "86.34.204.8, 208.122.31.29"});
       expect(serverParameters.getIp()).toEqual("86.34.204.8");
-    })
+    });
+    
+    it("should return null if there is no IP", function() {
+      var serverParameters = new Urban.Ticket.ServerParameters({});
+      expect(serverParameters.getIp()).toBeNull();
+    });
   });
 });

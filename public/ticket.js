@@ -26,8 +26,20 @@ Urban.Ticket = Class.create({
   },
   
   getServerParameters: function() {
-    var serverJson = this.json.description.match(/------------------\s+Submitted from: (\{.+\})/)[1];
-    return new Urban.Ticket.ServerParameters(JSON.parse(serverJson));
+    var matches = this.json.description.match(/------------------\s+Submitted from: (\{.+\})/);
+    if (!matches) {
+      return null;
+    }
+    var serverJson = matches[1];
+    
+    var parsed;
+    try {
+      parsed = JSON.parse(serverJson);
+    } catch (e) {
+      return null;
+    }
+    
+    return new Urban.Ticket.ServerParameters(parsed);
   }
 });
 
@@ -41,7 +53,11 @@ Urban.Ticket.ServerParameters = Class.create({
   },
   
   getIp: function() {
-    return this.json["HTTP_X_FORWARDED_FOR"].split(", ")[0];
+    field = this.json["HTTP_X_FORWARDED_FOR"];
+    if (!field) {
+      return null;
+    }
+    return field.split(", ")[0];
   }
 });
 
