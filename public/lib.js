@@ -67,17 +67,21 @@ Urban.View = Class.create({
   }
 });
 
+Urban.Ticket.load = function(callback) {
+  var href = window.location.href.replace(/\?.+/, "") + ".json";
+  new Ajax.Request(href, {method: "GET", onSuccess: function(transport) {
+    var ticket = new Urban.Ticket(transport.responseJSON);
+    callback(ticket);
+  }});
+};
+
 Urban.Admin = Class.create({
   initialize: function(element) {
     this.view = new Urban.View(element);
     
-    var href = window.location.href.replace(/\?.+/, "") + ".json";
-    new Ajax.Request(href, {method: "GET", onSuccess: this.success.bind(this)});
-  },
-
-  success: function(transport) {
-    var ticket = new Urban.Ticket(transport.responseJSON);
-    this.view.render(ticket.getMatches());
+    Urban.Ticket.load(function(ticket) {
+      this.view.render(ticket.getMatches());
+    }.bind(this));
   }
 });
 
