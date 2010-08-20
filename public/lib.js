@@ -20,6 +20,12 @@ Urban.Ticket = Class.create({
     addMatches(/'([^']{0,30})'/g, "quoted");
 
     return matches;
+  },
+  
+  getServerParameters: function() {
+    window.d = this.json.description;
+    var serverJson = this.json.description.match(/------------------\s+Submitted from: (\{.+\})/)[1];
+    return JSON.parse(serverJson);
   }
 });
 
