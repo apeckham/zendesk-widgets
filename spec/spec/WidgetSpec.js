@@ -7,12 +7,17 @@ beforeEach(function() {
 describe("Ticket", function() {
   it("should extract defids", function() {
     ticket = new Urban.Ticket({description: "The word is 'Nerd' - http://www.urbandictionary.com/define.php?term=Nerd&defid=5050890"});
-    expect(ticket.getMatches()).toEqual([{string: '5050890', type: 'defid'}, {string: 'Nerd', type: 'term'}]);
+    expect(ticket.getMatches()).toEqual([{string: '5050890', type: 'defid'}, {string: 'Nerd', type: 'term'}, {string: 'Nerd', type: 'term'}]);
   });
   
   it("should extract term text", function() {
     ticket = new Urban.Ticket({description: "I own the trademark for \"kosher meet market\" and am therefore 'requesting' the items"});
     expect(ticket.getMatches()).toEqual([{string: 'kosher meet market', type: 'term'}, {string: 'requesting', type: 'term'}]);
+  });
+  
+  it("should extract terms", function() {
+    ticket = new Urban.Ticket({description: "The word is http://www.urbandictionary.com/define.php?term=Nerd%20bird)"});
+    expect(ticket.getMatches()).toEqual([{string: 'Nerd bird', type: 'term'}]);
   });
   
   it("should extract server parameters", function() {

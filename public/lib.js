@@ -23,15 +23,18 @@ Urban.Ticket = Class.create({
     var description = this.json.description.split("------------------")[0];
     var matches = [];
 
-    function addMatches(pattern, type) {
+    function addMatches(pattern, type, callback) {
+      callback = callback || Prototype.K;
+      
       while (match = pattern.exec(description)) {
-        matches.push({string: match[1], type: type});
+        matches.push({string: callback(match[1]), type: type});
       }
     }
 
     addMatches(/defid=(\d+)/g, "defid");
     addMatches(/"([^"]{0,30})"/g, "term");
     addMatches(/'([^']{0,30})'/g, "term");
+    addMatches(/term=([\w%]+)/g, "term", decodeURIComponent);
 
     return matches;
   },
