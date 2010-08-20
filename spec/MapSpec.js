@@ -14,7 +14,7 @@ describe("Maps", function() {
           this.arguments = arguments;
         }
       }),
-      MapTypeId = {ROADMAP: 10101}
+      MapTypeId: {ROADMAP: 10101}
     }};
     
     var element = document.createElement('div');
