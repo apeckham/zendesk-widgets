@@ -9,11 +9,7 @@ describe("Maps", function() {
     
     window.google = {maps: {
       Map: jasmine.createSpy('google.maps.Map'),
-      LatLng: Class.create({
-        initialize: function() {
-          this.arguments = arguments;
-        }
-      }),
+      LatLng: jasmine.createSpy('google.maps.LatLng').andReturn({lat: 10}),
       MapTypeId: {ROADMAP: 10101}
     }};
     
@@ -31,8 +27,10 @@ describe("Maps", function() {
     var args = google.maps.Map.mostRecentCall.args;
     expect(args[0]).toEqual(element);
     expect(args[1].zoom).toEqual(6);
-    expect(args[1].center.arguments[0]).toEqual("myLat");
-    expect(args[1].center.arguments[1]).toEqual("myLon");
+    expect(args[1].center).toEqual({lat: 10});
     expect(args[1].mapTypeId).toEqual(10101);
+
+    expect(google.maps.LatLng.mostRecentCall.args[0]).toEqual("myLat");
+    expect(google.maps.LatLng.mostRecentCall.args[1]).toEqual("myLon");
   });
 });
