@@ -54,7 +54,17 @@ Urban.Ticket.load = function(callback) {
   }});
 };
 
-Urban.View = Class.create({
+Urban.Admin = Class.create({
+  initialize: function(element) {
+    this.view = new Urban.Admin.View(element);
+    
+    Urban.Ticket.load(function(ticket) {
+      this.view.render(ticket.getMatches());
+    }.bind(this));
+  }
+});
+
+Urban.Admin.View = Class.create({
   initialize: function(element) {
     this.element = element;
   },
@@ -78,16 +88,6 @@ Urban.View = Class.create({
     });
 
     this.element.update(ul);
-  }
-});
-
-Urban.Admin = Class.create({
-  initialize: function(element) {
-    this.view = new Urban.View(element);
-    
-    Urban.Ticket.load(function(ticket) {
-      this.view.render(ticket.getMatches());
-    }.bind(this));
   }
 });
 
