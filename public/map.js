@@ -8,12 +8,14 @@ Urban.Map = Class.create({
       new google.maps.Map(element, options);
     };
 
-    window.mapsLoaded = function() {
-      Urban.Ticket.load(function(ticket) {
-        loadScript('http://www.geoplugin.net/json.gp?ip=' + ticket.getServerParameters().getIp());
-      });
-    };
+    window.mapsLoaded = this.mapsLoaded.bind(this);
     
     loadScript('http://maps.google.com/maps/api/js?sensor=false&callback=mapsLoaded');
+  },
+  
+  mapsLoaded: function() {
+    Urban.Ticket.load(function(ticket) {
+      loadScript('http://www.geoplugin.net/json.gp?ip=' + ticket.getServerParameters().getIp());
+    });
   }
 });
