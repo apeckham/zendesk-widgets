@@ -94,13 +94,15 @@ Urban.Map = Class.create({
     };
 
     window.mapsCallback = function() {
-      var script = document.createElement('script');
-      script.src = 'http://www.geoplugin.net/json.gp?ip=86.34.204.8';
-      document.body.appendChild(script);
+      loadScript('http://www.geoplugin.net/json.gp?ip=86.34.204.8');
     };
     
-    var script = document.createElement('script');
-    script.src = 'http://maps.google.com/maps/api/js?sensor=false&callback=mapsCallback';
-    document.body.appendChild(script);
+    loadScript('http://maps.google.com/maps/api/js?sensor=false&callback=mapsCallback');
   }
 });
+
+function loadScript(src) {
+  var script = document.createElement('script');
+  script.src = src;
+  document.body.appendChild(script);
+}
