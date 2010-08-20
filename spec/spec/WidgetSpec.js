@@ -31,7 +31,7 @@ describe("Ticket", function() {
 
 describe("Server parameters", function() {
   it("should return the IP", function() {
-    var serverParameters = new Urban.ServerParameters({"REMOTE_ADDR": "208.122.31.10", "HTTP_X_FORWARDED_FOR": "86.34.204.8, 208.122.31.29"});
+    var serverParameters = new Urban.Ticket.ServerParameters({"REMOTE_ADDR": "208.122.31.10", "HTTP_X_FORWARDED_FOR": "86.34.204.8, 208.122.31.29"});
     expect(serverParameters.getIp()).toEqual("86.34.204.8");
   })
 });
