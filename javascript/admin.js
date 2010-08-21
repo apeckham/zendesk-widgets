@@ -22,12 +22,12 @@ Urban.Admin.View = Class.create({
     }
     
     matches = $A(matches).collect(function(match) {
-      html = "<a href=\"http://www.urbandictionary.com/appadmin/?field=";
+      var template = new Template("<a href=\"http://www.urbandictionary.com/appadmin/?field=#{field}&search=#{search}\">#{text}</a>");
       
       if (match.type == "defid") {
-        return html + "defid&search=" + match.string + "\">" + match.string + "</a>";
+        return template.evaluate({field: "defid", search: match.string, text: match.string});
       } else {
-        return html + "term&search=" + encodeURIComponent(match.string) + "\">" + match.string + "</a>";
+        return template.evaluate({field: "term", search: encodeURIComponent(match.string), text: match.string});
       }
     });
 
