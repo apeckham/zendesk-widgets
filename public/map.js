@@ -24,6 +24,7 @@ Urban.Map = Class.create({
   },
   
   geodataLoaded: function(geodata) {
+    this.element.setStyle({width: "200px", height: "200px"})
     var latLng = new google.maps.LatLng(geodata.geoplugin_latitude, geodata.geoplugin_longitude);
     new google.maps.Map(this.element, {zoom: 6, center: latLng, mapTypeId: google.maps.MapTypeId.ROADMAP});
   }
