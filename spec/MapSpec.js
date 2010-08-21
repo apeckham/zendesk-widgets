@@ -27,7 +27,7 @@ describe("Maps", function() {
     
     expect(window.loadScript.callCount).toEqual(2);
     expect(window.loadScript.argsForCall[0]).toEqual([Urban.Map.MAPS_URL]);
-    expect(window.loadScript.argsForCall[1]).toEqual(['http://www.geoplugin.net/json.gp?ip=86.34.204.8']);
+    expect(window.loadScript.argsForCall[1]).toEqual([Urban.Map.GEOPLUGIN_URL + '86.34.204.8']);
     
     expect(google.maps.Map).toHaveBeenCalled();
     

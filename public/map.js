@@ -6,7 +6,7 @@ Urban.Map = Class.create({
     
     window.geoPlugin = this.geodataLoaded.bind(this);
     window.mapsLoaded = this.mapsLoaded.bind(this);
-    loadScript('http://maps.google.com/maps/api/js?sensor=false&callback=mapsLoaded');
+    loadScript(Urban.Map.MAPS_URL);
   },
   
   mapsLoaded: function() {
@@ -20,7 +20,7 @@ Urban.Map = Class.create({
       return;
     }
     
-    loadScript('http://www.geoplugin.net/json.gp?ip=' + serverParameters.getIp());
+    loadScript(Urban.Map.GEOPLUGIN_URL + serverParameters.getIp());
   },
   
   geodataLoaded: function(geodata) {
@@ -30,3 +30,4 @@ Urban.Map = Class.create({
 });
 
 Urban.Map.MAPS_URL = 'http://maps.google.com/maps/api/js?sensor=false&callback=mapsLoaded';
+Urban.Map.GEOPLUGIN_URL = 'http://www.geoplugin.net/json.gp?ip=';
