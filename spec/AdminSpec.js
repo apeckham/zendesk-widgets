@@ -2,12 +2,13 @@ describe("View", function() {
   var element;
 
   beforeEach(function() {
-    element = new Element("div");
+    $("jasmine_content").update("<div class='widget' id='widget'><div id='admin-element'></div></div>");
+    element = $("admin-element");
   });
 
   it("should show some text if there were no defids", function() {
     new Urban.Admin.View(element).render([]);
-    expect(element.getInnerText()).toEqual("");
+    expect($("widget").visible()).toBeFalsy();
   });
   
   it("should link to appadmin", function() {

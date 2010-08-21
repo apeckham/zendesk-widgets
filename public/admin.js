@@ -16,6 +16,11 @@ Urban.Admin.View = Class.create({
   },
 
   render: function(matches) {
+    if (matches.length == 0) {
+      this.element.up(".widget").hide();
+      return;
+    }
+    
     matches = $A(matches).collect(function(match) {
       html = "<a href=\"http://www.urbandictionary.com/appadmin/?field=";
       
