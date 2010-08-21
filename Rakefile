@@ -18,7 +18,7 @@ def html_for(widget)
 
   <<HTML
 <div id="#{widget}-element">
-  <img src="http://zendesk-widgets.heroku.com/ajax-loader.gif" style="display: block; margin: 0 auto"/>
+  <img src="http://static.blog.urbandictionary.com.s3.amazonaws.com/zendesk-ajax-loader.gif" style="display: block; margin: 0 auto"/>
 </div>
 
 <script type="text/javascript">
