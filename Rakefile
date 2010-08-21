@@ -8,11 +8,13 @@ task :html do
   
   html = <<HTML
 <div id="#{widget}-element">
-<img src="http://zendesk-widgets.heroku.com/ajax-loader.gif" style="display: block; margin: 0 auto"/>
+  <img src="http://zendesk-widgets.heroku.com/ajax-loader.gif" style="display: block; margin: 0 auto"/>
 </div>
 
 <script type="text/javascript">
-new Urban.#{class_name}($("#{widget}-element"));
+  document.observe("widgets:load", function() {
+    new Urban.#{class_name}($("#{widget}-element"));
+  });
 </script>
 HTML
   
