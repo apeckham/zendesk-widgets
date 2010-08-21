@@ -22,7 +22,7 @@ Urban.Admin.View = Class.create({
     }
     
     matches = $A(matches).collect(function(match) {
-      var template = new Template("<a href=\"http://www.urbandictionary.com/appadmin/?field=#{field}&search=#{search}\">#{text}</a>");
+      var template = new Template("<a href=\"http://www.urbandictionary.com/appadmin/?field=#{field}&search=#{search}\" target=\"urbandictionary_appadmin\">#{text}</a>");
       
       if (match.type == "defid") {
         return template.evaluate({field: "defid", search: match.string, text: match.string});
