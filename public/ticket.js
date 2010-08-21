@@ -61,7 +61,7 @@ Urban.Ticket.ServerParameters = Class.create({
 });
 
 Urban.Ticket.load = function(callback) {
-  var href = window.location.href.replace(/\?.+/, "") + ".json";
+  var href = "/tickets/" + window.ticket_id + ".json";
   
   new Ajax.Request(href, {method: "GET", onSuccess: function(transport) {
     var ticket = new Urban.Ticket(transport.responseJSON);
