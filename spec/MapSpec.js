@@ -14,7 +14,8 @@ describe("Maps", function() {
       MapTypeId: {ROADMAP: 10101}
     }};
 
-    element = document.createElement('div');
+    $("jasmine_content").update("<div class='widget' id='widget'><div id='map-element'></div></div>");
+    element = $("map-element");
   });
 
   it("loads", function() {
@@ -48,7 +49,7 @@ describe("Maps", function() {
       window.mapsLoaded();
       expect(window.loadScript.callCount).toEqual(1);
       expect(window.loadScript.argsForCall[0]).toEqual([Urban.Map.MAPS_URL]);
-      expect(element.innerHTML).toEqual("No IP");
+      expect($("widget").visible()).toBeFalsy();
     });
 
     it("renders an error when ticket has parameters but no IP", function() {
@@ -58,7 +59,7 @@ describe("Maps", function() {
       window.mapsLoaded();
       expect(window.loadScript.callCount).toEqual(1);
       expect(window.loadScript.argsForCall[0]).toEqual([Urban.Map.MAPS_URL]);
-      expect(element.innerHTML).toEqual("No IP");
+      expect($("widget").visible()).toBeFalsy();
     });
   });
 });

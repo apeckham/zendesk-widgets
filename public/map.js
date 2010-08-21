@@ -16,7 +16,7 @@ Urban.Map = Class.create({
   ticketLoaded: function(ticket) {
     var serverParameters = ticket.getServerParameters();
     if (!serverParameters || !serverParameters.getIp()) {
-      this.element.update("No IP");
+      this.element.up(".widget").hide();
       return;
     }
     
