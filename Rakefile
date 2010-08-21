@@ -28,7 +28,7 @@ HTML
 end
 
 def all_html
-  Dir.glob("public/*.js").collect { |file| File.read(file) }.join
+  Dir.glob("javascript/*.js").collect { |file| File.read(file) }.join
 end
 
 class ZendeskUpdater
