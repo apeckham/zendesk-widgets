@@ -12,7 +12,7 @@ task :html do
 </div>
 
 <script type="text/javascript">
-  document.observe("widgets:load", function() {
+  document.observe("urban:load", function() {
     new Urban.#{class_name}($("#{widget}-element"));
   });
 </script>
