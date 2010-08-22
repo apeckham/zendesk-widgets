@@ -26,6 +26,8 @@ Urban.Admin.View = Class.create({
       
       if (match.type == "defid") {
         return template.evaluate({field: "defid", search: match.string, text: match.string});
+      } else if (match.type == "author") {
+        return template.evaluate({field: "author", search: encodeURIComponent(match.string), text: match.string});
       } else {
         return template.evaluate({field: "term", search: encodeURIComponent(match.string), text: match.string});
       }

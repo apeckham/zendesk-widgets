@@ -24,4 +24,11 @@ describe("View", function() {
     expect(anchors.length).toEqual(1);
     expect(anchors[0].href).toEqual("http://www.urbandictionary.com/appadmin/?field=term&search=a%20b");
   });
+  
+  it("should link to appadmin", function() {
+    new Urban.Admin.View(element).render([{string: "a b", type: "author"}]);
+    var anchors = element.select("a");
+    expect(anchors.length).toEqual(1);
+    expect(anchors[0].href).toEqual("http://www.urbandictionary.com/appadmin/?field=author&search=a%20b");
+  });
 });

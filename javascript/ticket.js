@@ -14,13 +14,16 @@ Urban.Ticket = Class.create({
         matches.push({string: (callback || Prototype.K)(match[1]), type: type});
       }
     }
+    
+    function clean(string) {
+      return decodeURIComponent(string.replace(/\+/g, " "));
+    }
 
     addMatches(/defid=(\d+)/g, "defid");
     addMatches(/"([^"]{0,50})"/g, "term");
     addMatches(/'([^']{0,50})'/g, "term");
-    addMatches(/term=([\w%\+]+)/g, "term", function(string) {
-      return decodeURIComponent(string.replace(/\+/g, " "));
-    });
+    addMatches(/term=([\w%\+]+)/g, "term", clean);
+    addMatches(/author=([\w%\+]+)/g, "author", clean);
 
     return matches;
   },
