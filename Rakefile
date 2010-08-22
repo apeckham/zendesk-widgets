@@ -3,11 +3,8 @@ task :test do
 end
 
 task :default do
-  widgets = {'admin' => 193100, 'map' => 197779}
-  widgets.each do |name, id|
-    ZendeskUpdater.update_widget(id, html_for(name))
-  end
-  
+  ZendeskUpdater.update_widget(193100, html_for('admin'))
+  ZendeskUpdater.update_widget(197779, html_for('map'))
   ZendeskUpdater.update_widget(193142, all_html)
 end
 
