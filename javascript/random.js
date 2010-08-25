@@ -10,6 +10,10 @@ Urban.Random = Class.create({
   },
   
   clicked: function() {
-    window.blah = 100;
+    new Ajax.Request("/rules/1183626.js", {method: "GET", onSuccess: function(transport) {
+      var tickets = JSON.parse(transport.responseText);
+      var ticket = tickets[Math.floor(Math.random() * tickets.length)];
+      window.location = "/tickets/" + ticket.nice_id;
+    }});
   }
 });
