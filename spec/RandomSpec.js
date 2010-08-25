@@ -10,4 +10,9 @@ describe("Random widget", function() {
     new Urban.Random(element);
     expect(element.down("a")).toBeTruthy();
   });
+  
+  it("should do something when you click on the link", function() {
+    new Urban.Random(element).clicked();
+    expect(window.blah).toEqual(100);
+  });
 });

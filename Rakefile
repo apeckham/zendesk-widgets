@@ -5,6 +5,7 @@ end
 task :default do
   ZendeskUpdater.update_widget(193100, html_for('admin'))
   ZendeskUpdater.update_widget(197779, html_for('map'))
+  ZendeskUpdater.update_widget(199606, html_for('random'))
   ZendeskUpdater.update_widget(193142, all_html)
 end
 
