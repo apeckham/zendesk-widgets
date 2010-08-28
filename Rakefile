@@ -26,7 +26,9 @@ HTML
 end
 
 def all_html
-  Dir.glob("javascript/*.js").collect { |file| File.read(file) }.join
+  files = Dir.glob("javascript/*.js")
+  files << "lib/jquery.hotkeys.js"
+  files.collect { |file| File.read(file) }.join
 end
 
 class ZendeskUpdater
@@ -35,6 +37,7 @@ class ZendeskUpdater
   basic_auth "aaron@urbandictionary.com", "vedd6un1en"
   
   def self.update_widget(id, content)
+    puts "updating widget #{id} with #{content[0..60].inspect}..."
     response = post("/widgets/#{id}", :body => {:widget => {:content => content}, "_method" => "put", "submit_type" => "update_widget"})
     raise unless response.body =~ %r{<title>\s+Urban Dictionary : Widgets\s+</title>}m
   end
