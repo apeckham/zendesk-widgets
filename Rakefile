@@ -37,7 +37,7 @@ class ZendeskUpdater
   basic_auth "aaron@urbandictionary.com", "vedd6un1en"
   
   def self.update_widget(id, content)
-    puts "updating widget #{id} with #{content[0..60].inspect}..."
+    puts "updating widget #{id} with #{content[0..40].inspect}... (#{content.length} bytes)"
     response = post("/widgets/#{id}", :body => {:widget => {:content => content}, "_method" => "put", "submit_type" => "update_widget"})
     raise unless response.body =~ %r{<title>\s+Urban Dictionary : Widgets\s+</title>}m
   end
