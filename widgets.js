@@ -10,10 +10,6 @@ Urban.Admin = Class.create({
   }
 });
 
-$j(function() {
-  new Urban.Admin($("admin-element"));
-});
-
 Urban.Admin.View = Class.create({
   initialize: function(element) {
     this.element = element;
@@ -86,3 +82,7 @@ Urban.Ticket.load = function(callback) {
     callback(ticket);
   }});
 };
+
+$j(function() {
+  new Urban.Admin($("admin-element"));
+});
