@@ -51,24 +51,32 @@ Urban.Ticket = Class.create({
   },
 
   getMatches: function() {
-    var description = this.json.description.split("------------------")[0];
     var matches = [];
-
-    function addMatches(pattern, type, callback) {
-      while (match = pattern.exec(description)) {
-        matches.push({string: (callback || Prototype.K)(match[1]), type: type});
+    
+    function matchString(string) {
+      function addMatches(pattern, type, callback) {
+        while (match = pattern.exec(string)) {
+          matches.push({string: (callback || Prototype.K)(match[1]), type: type});
+        }
       }
+
+      function clean(string) {
+        return decodeURIComponent(string.replace(/\+/g, " "));
+      }
+
+      addMatches(/defid=(\d+)/g, "defid");
+      addMatches(/"([^"]{0,50})"/g, "term");
+      addMatches(/'([^']{0,50})'/g, "term");
+      addMatches(/term=([\w%\+]+)/g, "term", clean);
+      addMatches(/author=([\w%\+]+)/g, "author", clean);
     }
     
-    function clean(string) {
-      return decodeURIComponent(string.replace(/\+/g, " "));
-    }
-
-    addMatches(/defid=(\d+)/g, "defid");
-    addMatches(/"([^"]{0,50})"/g, "term");
-    addMatches(/'([^']{0,50})'/g, "term");
-    addMatches(/term=([\w%\+]+)/g, "term", clean);
-    addMatches(/author=([\w%\+]+)/g, "author", clean);
+    var description = this.json.description.split("------------------")[0];
+    matchString(description);
+    
+    $A(this.json.comments).each(function(comment) {
+      matchString(comment.value);
+    });
 
     return matches;
   }

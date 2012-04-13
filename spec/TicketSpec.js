@@ -18,4 +18,9 @@ describe("Ticket", function() {
     var ticket = new Urban.Ticket({description: "The word is http://www.urbandictionary.com/author.php?author=Nerd%20bird+jetblue+plane)"});
     expect(ticket.getMatches()).toEqual([{string: 'Nerd bird jetblue plane', type: 'author'}]);
   });
+  
+  it("extracts from comments too", function() {
+    var ticket = new Urban.Ticket({description: "", comments: [{value: "nothing"}, {value: "definition for \"Dan\nXX\"\n\nJeff\n\n"}]});
+    expect(ticket.getMatches()).toEqual([{string: "Dan\nXX", type: 'term'}]);
+  });
 });
