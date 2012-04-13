@@ -14,10 +14,6 @@ task :admin do
 HTML
 end
 
-task :all_html do
-  puts Dir.glob("javascript/*.js").collect { |file| File.read(file) }.join
-end
-
 task :loader do
   puts <<END
 function loadScript(src) {
