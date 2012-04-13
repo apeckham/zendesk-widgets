@@ -15,20 +15,20 @@ describe("View", function() {
     new Urban.Admin.View(element).render([{string: "150125", type: "defid"}]);
     var anchors = element.select("a");
     expect(anchors.length).toEqual(1);
-    expect(anchors[0].href).toEqual("http://www.urbandictionary.com/https://secure.urbandictionary.com/appadmin//?field=defid&search=150125");
+    expect(anchors[0].href).toEqual("https://secure.urbandictionary.com/appadmin/?field=defid&search=150125");
   });
   
   it("should link to https://secure.urbandictionary.com/appadmin/", function() {
     new Urban.Admin.View(element).render([{string: "a b", type: "term"}]);
     var anchors = element.select("a");
     expect(anchors.length).toEqual(1);
-    expect(anchors[0].href).toEqual("http://www.urbandictionary.com/https://secure.urbandictionary.com/appadmin//?field=term&search=a%20b");
+    expect(anchors[0].href).toEqual("https://secure.urbandictionary.com/appadmin/?field=term&search=a%20b");
   });
   
   it("should link to https://secure.urbandictionary.com/appadmin/", function() {
     new Urban.Admin.View(element).render([{string: "a b", type: "author"}]);
     var anchors = element.select("a");
     expect(anchors.length).toEqual(1);
-    expect(anchors[0].href).toEqual("http://www.urbandictionary.com/https://secure.urbandictionary.com/appadmin//?field=author&search=a%20b");
+    expect(anchors[0].href).toEqual("https://secure.urbandictionary.com/appadmin/?field=author&search=a%20b");
   });
 });
