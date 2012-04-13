@@ -17,3 +17,13 @@ end
 task :all_html do
   puts Dir.glob("javascript/*.js").collect { |file| File.read(file) }.join
 end
+
+task :loader do
+  puts <<END
+function loadScript(src) {
+  var script = document.createElement('script');
+  script.src = src;
+  document.body.appendChild(script);
+}
+END
+end
