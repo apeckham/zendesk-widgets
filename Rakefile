@@ -13,13 +13,3 @@ task :admin do
 </script>
 HTML
 end
-
-task :loader do
-  puts <<END
-function loadScript(src) {
-  var script = document.createElement('script');
-  script.src = src;
-  document.body.appendChild(script);
-}
-END
-end
