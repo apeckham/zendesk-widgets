@@ -15,7 +15,5 @@ HTML
 end
 
 task :all_html do
-  files = Dir.glob("javascript/*.js")
-  files << "lib/jquery.hotkeys.js"
-  puts files.collect { |file| File.read(file) }.join
+  puts Dir.glob("javascript/*.js").collect { |file| File.read(file) }.join
 end
