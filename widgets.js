@@ -56,7 +56,8 @@ Urban.Ticket = Class.create({
     function matchString(string) {
       function addMatches(pattern, type, callback) {
         while (match = pattern.exec(string)) {
-          matches.push({string: (callback || Prototype.K)(match[1]), type: type});
+          var firstMatch = match[1].replace(/\n/g, " ");
+          matches.push({string: (callback || Prototype.K)(firstMatch), type: type});
         }
       }
 
