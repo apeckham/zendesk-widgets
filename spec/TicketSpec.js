@@ -15,7 +15,7 @@ describe("Ticket", function() {
   });
   
   it("should extract terms and ignores duplicates", function() {
-    var ticket = new Urban.Ticket({description: "The word is 'Nerd bird jetblue plane' and 'Nerd bird jetblue plane')"});
+    var ticket = new Urban.Ticket({description: "The word is 'Nerd bird jetblue plane' and 'Nerd BIRD jetblue plane')"});
     expect(ticket.getMatches()).toEqual([{string: 'Nerd bird jetblue plane', type: 'term'}]);
   });
   

@@ -60,7 +60,7 @@ Urban.Ticket = Class.create({
           var newHash = {string: (callback || Prototype.K)(firstMatch), type: type};
 
           var alreadyFound = matches.find(function(found) {
-            return found.string == newHash.string && found.type == newHash.type;
+            return found.string.toLowerCase() == newHash.string.toLowerCase() && found.type == newHash.type;
           });
 
           if (!alreadyFound) {
