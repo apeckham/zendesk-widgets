@@ -1,7 +1,7 @@
 describe("Ticket", function() {
   it("should extract defids", function() {
     var ticket = new Urban.Ticket({description: "The word is 'Nerd' - http://www.urbandictionary.com/define.php?term=Nerd&defid=5050890"});
-    expect(ticket.getMatches()).toEqual([{string: '5050890', type: 'defid'}, {string: 'Nerd', type: 'term'}, {string: 'Nerd', type: 'term'}]);
+    expect(ticket.getMatches()).toEqual([{string: '5050890', type: 'defid'}, {string: 'Nerd', type: 'term'}]);
   });
   
   it("should extract term text", function() {
@@ -11,6 +11,11 @@ describe("Ticket", function() {
   
   it("should extract terms", function() {
     var ticket = new Urban.Ticket({description: "The word is http://www.urbandictionary.com/define.php?term=Nerd%20bird+jetblue+plane)"});
+    expect(ticket.getMatches()).toEqual([{string: 'Nerd bird jetblue plane', type: 'term'}]);
+  });
+  
+  it("should extract terms and ignores duplicates", function() {
+    var ticket = new Urban.Ticket({description: "The word is 'Nerd bird jetblue plane' and 'Nerd bird jetblue plane')"});
     expect(ticket.getMatches()).toEqual([{string: 'Nerd bird jetblue plane', type: 'term'}]);
   });
   

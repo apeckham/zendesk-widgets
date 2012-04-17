@@ -57,7 +57,15 @@ Urban.Ticket = Class.create({
       function addMatches(pattern, type, callback) {
         while (match = pattern.exec(string)) {
           var firstMatch = match[1].replace(/\n/g, " ");
-          matches.push({string: (callback || Prototype.K)(firstMatch), type: type});
+          var newHash = {string: (callback || Prototype.K)(firstMatch), type: type};
+
+          var alreadyFound = matches.find(function(found) {
+            return found.string == newHash.string && found.type == newHash.type;
+          });
+
+          if (!alreadyFound) {
+            matches.push(newHash);
+          }
         }
       }
 
@@ -79,7 +87,7 @@ Urban.Ticket = Class.create({
       matchString(comment.value);
     });
 
-    return matches;
+    return $A(matches).uniq();
   }
 });
 
